@@ -7,10 +7,16 @@ class List(models.Model):
     name = models.CharField(max_length=40)
     background_image = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 
 class Task(models.Model):
     title = models.CharField(max_length=50, null=False)
     description = models.CharField(max_length=500)
-    user_list = models.ForeignKey(List, on_delete=models.CASCADE)
+    user_list = models.ForeignKey(List, on_delete=models.CASCADE, related_name='tasks')
     deadline = models.DateField()
     order_num = models.IntegerField()
+
+    def __str__(self):
+        return self.title
